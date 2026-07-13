@@ -1,18 +1,18 @@
 import { PolicyLayout, ContactBlock } from "@/components/layout/PolicyLayout/PolicyLayout";
 
-export const metadata = { title: "Payment Policy — AvontShop" };
+export const metadata = { title: "Payment Policy — ElenElectro" };
 
 export default function PaymentPolicyPage() {
   return (
     <PolicyLayout title="Payment Policy" lastUpdated="29 May 2026">
       <p>
         This Payment Policy explains how payments are accepted, processed, verified, refunded, and handled
-        for purchases made through www.avontshop.com.
+        for purchases made through www.elenelectro.com.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In this Policy, &ldquo;AvontShop&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
+        In this Policy, &ldquo;ElenElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
         means AVONTRA LTD. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
         person or business placing an order through the Website.
       </p>
@@ -27,7 +27,7 @@ export default function PaymentPolicyPage() {
         charges, additional warranty options, and any other paid services or charges displayed at checkout.
       </p>
       <p>
-        1.2 AvontShop sells electrical products, electrical materials, wiring accessories, lighting-related
+        1.2 ElenElectro sells electrical products, electrical materials, wiring accessories, lighting-related
         products, installation components, distribution and circuit protection products, sockets, switches,
         cables, mounting accessories, and related goods.
       </p>
@@ -54,7 +54,7 @@ export default function PaymentPolicyPage() {
         card issuer or bank may apply its own exchange rate, conversion fee, or foreign transaction fee.
       </p>
       <p>
-        2.5 AvontShop does not control exchange rates, bank conversion fees, card issuer charges, or foreign
+        2.5 ElenElectro does not control exchange rates, bank conversion fees, card issuer charges, or foreign
         transaction fees.
       </p>
 
@@ -74,7 +74,7 @@ export default function PaymentPolicyPage() {
       </ul>
       <p>3.3 Prices may change at any time before an order is placed.</p>
       <p>
-        3.4 Price changes will not affect orders already accepted by AvontShop, except where there has been
+        3.4 Price changes will not affect orders already accepted by ElenElectro, except where there has been
         an obvious pricing, currency, tax, discount, or technical error.
       </p>
       <p>
@@ -83,14 +83,14 @@ export default function PaymentPolicyPage() {
       </p>
 
       <h2>4. Accepted Payment Methods</h2>
-      <p>4.1 AvontShop accepts secure card payments using:</p>
+      <p>4.1 ElenElectro accepts secure card payments using:</p>
       <ul>
         <li>Visa</li>
         <li>Mastercard</li>
       </ul>
       <p>
         4.2 Other payment methods are not accepted unless they are expressly displayed at checkout or agreed
-        by AvontShop in writing.
+        by ElenElectro in writing.
       </p>
       <p>
         4.3 We do not currently offer cash on delivery, payment on account, open credit terms, cheque
@@ -106,7 +106,7 @@ export default function PaymentPolicyPage() {
         approve, decline, or review the transaction.
       </p>
       <p>
-        5.3 AvontShop does not guarantee that your payment will be accepted. Payment approval depends on
+        5.3 ElenElectro does not guarantee that your payment will be accepted. Payment approval depends on
         your card issuer, bank, payment provider, fraud checks, authentication requirements, available
         funds, transaction limits, and other factors outside our control.
       </p>
@@ -120,9 +120,9 @@ export default function PaymentPolicyPage() {
       </p>
 
       <h2>6. Card Security and Payment Data</h2>
-      <p>6.1 AvontShop takes payment security seriously.</p>
+      <p>6.1 ElenElectro takes payment security seriously.</p>
       <p>
-        6.2 Card payments are handled through secure third-party payment providers. AvontShop does not store
+        6.2 Card payments are handled through secure third-party payment providers. ElenElectro does not store
         your full card number, full card security code, or complete card credentials on its own systems.
       </p>
       <p>6.3 We may receive limited payment-related information from payment providers, such as:</p>
@@ -167,7 +167,7 @@ export default function PaymentPolicyPage() {
         be processed.
       </p>
       <p>
-        8.2 AvontShop is not responsible for payment failures caused by your bank, card issuer, payment
+        8.2 ElenElectro is not responsible for payment failures caused by your bank, card issuer, payment
         provider, insufficient funds, incorrect card details, authentication failure, transaction limits,
         network issues, or fraud controls.
       </p>
@@ -181,7 +181,7 @@ export default function PaymentPolicyPage() {
 
       <h2>9. Fraud Prevention and Payment Reviews</h2>
       <p>
-        9.1 To protect customers, AvontShop, payment providers, and card networks, transactions may be
+        9.1 To protect customers, ElenElectro, payment providers, and card networks, transactions may be
         screened for fraud, abuse, unauthorised activity, sanctions risk, and payment security concerns.
       </p>
       <p>
@@ -212,7 +212,7 @@ export default function PaymentPolicyPage() {
         address, VAT/tax details, and any other information required for invoicing.
       </p>
       <p>
-        10.3 Where applicable, AvontShop may issue order confirmations, payment confirmations, receipts, VAT
+        10.3 Where applicable, ElenElectro may issue order confirmations, payment confirmations, receipts, VAT
         invoices, or commercial invoices.
       </p>
       <p>
@@ -245,7 +245,7 @@ export default function PaymentPolicyPage() {
       </p>
 
       <h2>12. International Payments, Customs, and Import Charges</h2>
-      <p>12.1 AvontShop dispatches orders from the United Kingdom.</p>
+      <p>12.1 ElenElectro dispatches orders from the United Kingdom.</p>
       <p>
         12.2 For orders delivered outside the United Kingdom, your order may be subject to customs clearance,
         import duties, import VAT, local taxes, brokerage fees, courier handling fees, customs clearance
@@ -253,14 +253,14 @@ export default function PaymentPolicyPage() {
       </p>
       <p>
         12.3 Unless expressly stated otherwise at checkout, such customs and import charges are not included
-        in the product price, delivery price, or payment collected by AvontShop.
+        in the product price, delivery price, or payment collected by ElenElectro.
       </p>
       <p>
         12.4 You are responsible for paying any customs duties, import VAT, taxes, brokerage fees, handling
         charges, and local charges imposed in the destination country.
       </p>
       <p>
-        12.5 AvontShop does not control customs authorities, customs delays, import tax assessments, courier
+        12.5 ElenElectro does not control customs authorities, customs delays, import tax assessments, courier
         clearance fees, or local charges.
       </p>
       <p>
@@ -312,7 +312,7 @@ export default function PaymentPolicyPage() {
       </p>
       <p>
         14.5 If you validly cancel or return the product before the Additional Warranty begins and a refund
-        is required by law or approved by AvontShop, the related Additional Warranty charge may also be
+        is required by law or approved by ElenElectro, the related Additional Warranty charge may also be
         refunded.
       </p>
 
@@ -331,18 +331,18 @@ export default function PaymentPolicyPage() {
       </p>
       <p>
         15.5 Currency conversion differences, card issuer fees, foreign transaction fees, and bank charges
-        are not controlled by AvontShop and are not refundable by AvontShop.
+        are not controlled by ElenElectro and are not refundable by ElenElectro.
       </p>
       <p>
         15.6 Customs duties, import VAT, local taxes, brokerage fees, courier handling fees, customs
-        clearance fees, and other local charges are not charged by AvontShop and are not refundable by
-        AvontShop.
+        clearance fees, and other local charges are not charged by ElenElectro and are not refundable by
+        ElenElectro.
       </p>
 
       <h2>16. Chargebacks and Payment Disputes</h2>
       <p>
         16.1 If you have a problem with an order, payment, delivery, return, refund, or warranty claim, you
-        should contact us first at info@avontshop.com so we can investigate and try to resolve the issue.
+        should contact us first at info@elenelectro.com so we can investigate and try to resolve the issue.
       </p>
       <p>
         16.2 If you open a chargeback, card dispute, or payment dispute, we may be required to provide
@@ -369,7 +369,7 @@ export default function PaymentPolicyPage() {
         17.1 Business Customers must pay in full at checkout unless we expressly agree otherwise in writing.
       </p>
       <p>
-        17.2 AvontShop does not offer credit terms, open account purchasing, or deferred payment to Business
+        17.2 ElenElectro does not offer credit terms, open account purchasing, or deferred payment to Business
         Customers unless separately approved in writing.
       </p>
       <p>

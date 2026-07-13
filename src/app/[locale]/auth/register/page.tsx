@@ -15,7 +15,7 @@ import { COUNTRIES } from "@/lib/countries";
 function getPasswordStrength(password: string): { level: number; label: string; color: string } {
   if (password.length === 0) return { level: 0, label: "", color: "transparent" };
   if (password.length < 6) return { level: 25, label: "Weak", color: "#ef4444" };
-  if (password.length < 10) return { level: 50, label: "Fair", color: "#f59e0b" };
+  if (password.length < 10) return { level: 50, label: "Fair", color: "#00D4E0" };
   if (password.length < 14) return { level: 75, label: "Good", color: "#22c55e" };
   return { level: 100, label: "Strong", color: "#16a34a" };
 }
@@ -283,7 +283,7 @@ export default function RegisterPage() {
                       value={form.firstName}
                       onChange={set("firstName")}
                       placeholder="John"
-                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.firstName ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                   </div>
@@ -299,7 +299,7 @@ export default function RegisterPage() {
                       value={form.lastName}
                       onChange={set("lastName")}
                       placeholder="Doe"
-                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.lastName ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                   </div>
@@ -314,7 +314,7 @@ export default function RegisterPage() {
                       type="date"
                       value={form.dateOfBirth}
                       onChange={set("dateOfBirth")}
-                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.dateOfBirth ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                   </div>
@@ -348,7 +348,7 @@ export default function RegisterPage() {
                       value={form.email}
                       onChange={set("email")}
                       placeholder="you@example.com"
-                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.email ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                   </div>
@@ -364,7 +364,7 @@ export default function RegisterPage() {
                       value={form.phone}
                       onChange={set("phone")}
                       placeholder={`${phoneHint} XX XXX XXXX`}
-                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.phone ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                   </div>
@@ -406,7 +406,7 @@ export default function RegisterPage() {
                       value={form.street}
                       onChange={set("street")}
                       placeholder="123 Main Street, Apt 4B"
-                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-3 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.street ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                   </div>
@@ -492,7 +492,7 @@ export default function RegisterPage() {
                       value={form.password}
                       onChange={set("password")}
                       placeholder="Min 6 characters"
-                      className="peer w-full pl-10 pr-10 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-10 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.password ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                     <button
@@ -524,7 +524,7 @@ export default function RegisterPage() {
                       value={form.confirmPassword}
                       onChange={set("confirmPassword")}
                       placeholder="Confirm your password"
-                      className="peer w-full pl-10 pr-10 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]"
+                      className="peer w-full pl-10 pr-10 py-2.5 text-sm text-ink bg-surface border border-line rounded-lg outline-none transition-all placeholder:text-ink-subtle hover:border-line-hover focus:border-brand focus:shadow-[0_0_0_3px_rgba(27,77,255,0.15)]"
                       style={errors.confirmPassword ? { borderColor: "var(--color-danger)" } : undefined}
                     />
                     <button

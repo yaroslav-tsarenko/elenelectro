@@ -1,18 +1,18 @@
 /* Admin Panel — Premium Dashboard Theme (Light / Dark) */
 
 [data-admin-theme] {
-  --admin-accent: #4f46e5;
-  --admin-accent-light: #6366f1;
-  --admin-accent-dark: #4338ca;
-  --admin-accent-bg: rgba(79, 70, 229, 0.10);
-  --admin-accent-bg-hover: rgba(79, 70, 229, 0.18);
+  --admin-accent: #1B4DFF;
+  --admin-accent-light: #4F70FF;
+  --admin-accent-dark: #1740D9;
+  --admin-accent-bg: rgba(27, 77, 255, 0.10);
+  --admin-accent-bg-hover: rgba(27, 77, 255, 0.18);
   --admin-radius: 14px;
   --admin-radius-lg: 22px;
   --admin-radius-xl: 26px;
   --admin-sidebar-width: 260px;
   --admin-topbar-height: 72px;
-  --admin-success: #10b981;
-  --admin-warning: #f59e0b;
+  --admin-success: #4F70FF;
+  --admin-warning: #00D4E0;
   --admin-danger: #ef4444;
 }
 
@@ -47,13 +47,13 @@
   --color-text-tertiary: #71717a;
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-hover: rgba(255, 255, 255, 0.14);
-  --color-accent: #6366f1;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
+  --color-accent: #4F70FF;
+  --color-success: #4F70FF;
+  --color-warning: #00D4E0;
   --color-danger: #ef4444;
-  --color-accent-light: rgba(99, 102, 241, 0.16);
-  --gradient-primary: #6366f1;
-  --shadow-accent: 0 8px 30px rgba(99, 102, 241, 0.3);
+  --color-accent-light: rgba(79, 112, 255, 0.16);
+  --gradient-primary: #4F70FF;
+  --shadow-accent: 0 8px 30px rgba(79, 112, 255, 0.3);
 }
 
 /* ─── Light Theme ─── */
@@ -87,13 +87,13 @@
   --color-text-tertiary: #a1a1aa;
   --color-border: rgba(0, 0, 0, 0.08);
   --color-border-hover: rgba(0, 0, 0, 0.15);
-  --color-accent: #4f46e5;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
+  --color-accent: #1B4DFF;
+  --color-success: #4F70FF;
+  --color-warning: #00D4E0;
   --color-danger: #ef4444;
-  --color-accent-light: rgba(79, 70, 229, 0.08);
-  --gradient-primary: #4f46e5;
-  --shadow-accent: 0 8px 30px rgba(79, 70, 229, 0.22);
+  --color-accent-light: rgba(27, 77, 255, 0.08);
+  --gradient-primary: #1B4DFF;
+  --shadow-accent: 0 8px 30px rgba(27, 77, 255, 0.22);
 }
 
 /* ─── Admin Layout ─── */
@@ -326,7 +326,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(79, 70, 229, 0.1));
+  background: linear-gradient(135deg, rgba(27, 77, 255, 0.2), rgba(27, 77, 255, 0.1));
   color: var(--admin-accent);
   display: flex;
   align-items: center;
@@ -334,7 +334,7 @@
   font-size: 0.6875rem;
   font-weight: 700;
   flex-shrink: 0;
-  border: 1px solid rgba(79, 70, 229, 0.2);
+  border: 1px solid rgba(27, 77, 255, 0.2);
 }
 
 .admin-sidebar-footer-info {
@@ -441,7 +441,7 @@
 
 .kpi-card-change-up {
   color: var(--admin-success);
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(79, 112, 255, 0.1);
 }
 
 .kpi-card-change-down {
@@ -520,12 +520,12 @@
 }
 
 .admin-badge-success {
-  background: rgba(16, 185, 129, 0.12);
+  background: rgba(79, 112, 255, 0.12);
   color: var(--admin-success);
 }
 
 .admin-badge-warning {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(0, 212, 224, 0.12);
   color: var(--admin-warning);
 }
 
@@ -535,7 +535,7 @@
 }
 
 .admin-badge-accent {
-  background: rgba(79, 70, 229, 0.12);
+  background: rgba(27, 77, 255, 0.12);
   color: var(--admin-accent);
 }
 
@@ -624,7 +624,7 @@
   font-weight: 700;
 }
 
-.rank-1 { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+.rank-1 { background: rgba(16, 212, 218, 0.2); color: #10D4DA; }
 .rank-2 { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
 .rank-3 { background: rgba(205, 127, 50, 0.2); color: #cd7f32; }
 .rank-default { background: var(--admin-row-hover); color: var(--admin-text-muted); }
@@ -736,8 +736,8 @@
 }
 
 .admin-input:focus {
-  border-color: rgba(79, 70, 229, 0.5);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  border-color: rgba(27, 77, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(27, 77, 255, 0.12);
 }
 
 .admin-input::placeholder {
@@ -760,8 +760,8 @@
 }
 
 .admin-textarea:focus {
-  border-color: rgba(79, 70, 229, 0.5);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  border-color: rgba(27, 77, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(27, 77, 255, 0.12);
 }
 
 .admin-select {
@@ -781,8 +781,8 @@
 }
 
 .admin-select:focus {
-  border-color: rgba(79, 70, 229, 0.5);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  border-color: rgba(27, 77, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(27, 77, 255, 0.12);
 }
 
 .admin-label {

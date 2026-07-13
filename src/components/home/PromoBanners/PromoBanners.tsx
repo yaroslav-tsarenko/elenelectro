@@ -17,7 +17,7 @@ const banners = [
     desc: "Certified panels, circuit breakers, and modular enclosures for residential and commercial installations.",
     href: "/catalog",
     cta: "Shop Switchgear",
-    accent: "#4f46e5",
+    accent: "#1B4DFF",
   },
   {
     image: banner2,
@@ -35,7 +35,7 @@ const banners = [
     desc: "Premium copper cables, flexible wiring, terminal blocks, and accessories at wholesale prices.",
     href: "/catalog",
     cta: "View Cables",
-    accent: "#059669",
+    accent: "#1B4DFF",
   },
 ];
 

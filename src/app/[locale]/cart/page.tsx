@@ -209,7 +209,7 @@ export default function CartPage() {
             </div>
 
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Link href="/checkout" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-brand text-white font-bold text-base no-underline shadow-[0_4px_14px_rgba(79,70,229,0.3)] transition-all hover:-translate-y-px hover:shadow-[0_6px_18px_rgba(79,70,229,0.4)]">
+              <Link href="/checkout" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-brand text-white font-bold text-base no-underline shadow-[0_4px_14px_rgba(27,77,255,0.3)] transition-all hover:-translate-y-px hover:shadow-[0_6px_18px_rgba(27,77,255,0.4)]">
                 {t("checkout")} <ArrowRight size={18} />
               </Link>
             </motion.div>

@@ -4,7 +4,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   electronics: "1A1A2E/FFFFFF",
   clothing: "2D3436/FFFFFF",
   "home-garden": "4A6741/FFFFFF",
-  sports: "E53935/FFFFFF",
+  sports: "1B4DFF/FFFFFF",
   default: "6C6C6C/FFFFFF",
 };
 

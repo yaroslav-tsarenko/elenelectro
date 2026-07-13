@@ -152,7 +152,7 @@ export default function AdminDashboard() {
     { label: "Today's Revenue", value: formatPrice(data.todayRevenue), icon: <DollarSign size={18} />, bg: "rgba(0,200,83,0.12)", fg: "#00C853", change: revChange, sub: `vs ${formatPrice(data.yesterdayRevenue)} yesterday` },
     { label: "Today's Orders", value: String(data.todayOrders), icon: <ShoppingCart size={18} />, bg: "rgba(10,132,255,0.12)", fg: "#0A84FF", change: pct(data.todayOrders, data.yesterdayOrders), sub: `vs ${data.yesterdayOrders} yesterday` },
     { label: "Total Products", value: String(data.totalProducts), icon: <Package size={18} />, bg: "rgba(139,92,246,0.12)", fg: "#8b5cf6", sub: `${data.stockDistribution.lowStock} low stock` },
-    { label: "Total Customers", value: String(data.totalCustomers), icon: <Users size={18} />, bg: "rgba(245,158,11,0.12)", fg: "#F59E0B", sub: `${data.totalOrders} total orders` },
+    { label: "Total Customers", value: String(data.totalCustomers), icon: <Users size={18} />, bg: "rgba(0,212,224,0.12)", fg: "#F59E0B", sub: `${data.totalOrders} total orders` },
   ];
 
   const topMax = data.topProducts.length > 0 ? Number(data.topProducts[0]._sum.total) : 1;

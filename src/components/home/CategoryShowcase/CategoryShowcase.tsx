@@ -6,10 +6,10 @@ import { motion, useInView } from "framer-motion";
 import { Package } from "lucide-react";
 
 const COLORS = [
-  "rgba(79,70,229,0.12)",
+  "rgba(27,77,255,0.12)",
   "rgba(6,182,212,0.12)",
-  "rgba(16,185,129,0.14)",
-  "rgba(245,158,11,0.14)",
+  "rgba(79,112,255,0.14)",
+  "rgba(0,212,224,0.14)",
   "rgba(244,63,94,0.12)",
   "rgba(124,58,237,0.14)",
   "rgba(59,130,246,0.14)",

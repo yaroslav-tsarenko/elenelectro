@@ -73,7 +73,7 @@ const defaultSlides: DefaultSlide[] = [
     subtitle: "Premium copper cables, flexible wiring, terminal blocks and accessories at wholesale prices",
     ctaLabel: "View Cables",
     linkUrl: "/catalog",
-    bgColor: "#312e81",
+    bgColor: "#0B1530",
     textColor: "#ffffff",
     bgImage: banner3,
   },

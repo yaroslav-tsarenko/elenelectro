@@ -14,7 +14,7 @@ import { useCart } from "@/providers/CartProvider";
 import { useAuth } from "@/providers/AuthProvider";
 import { ThemeToggle } from "./ThemeToggle";
 import { AnimatePresence, motion } from "framer-motion";
-import { AvontLogo } from "../AvontLogo";
+import { ElenLogo } from "../ElenLogo";
 import { CurrencySwitcher } from "./CurrencySwitcher";
 
 interface Category {
@@ -131,8 +131,8 @@ export function Header() {
             href="/"
             className="text-2xl font-extrabold tracking-[-0.04em] text-ink whitespace-nowrap flex items-center gap-[0.4rem] shrink-0 no-underline"
           >
-            <AvontLogo size={24} />
-            <span className="text-brand font-black">AvontShop</span>
+            <ElenLogo size={24} />
+            <span className="text-brand font-black">ElenElectro</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-0.5 shrink-0">

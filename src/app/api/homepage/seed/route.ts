@@ -41,7 +41,7 @@ export async function POST() {
 
     // ── Homepage Tabs ──────────────────────────────────
     const tabs = [
-      { label: "Offers", icon: "Flame", linkUrl: "/offers", color: "#E53935", sortOrder: 0 },
+      { label: "Offers", icon: "Flame", linkUrl: "/offers", color: "#1B4DFF", sortOrder: 0 },
       { label: "Apple Store", icon: "Apple", linkUrl: "/brands/apple", color: "#333333", sortOrder: 1 },
       { label: "Dyson Store", icon: "Wind", linkUrl: "/brands/dyson", color: "#6B21A8", sortOrder: 2 },
       { label: "Get Bonus", icon: "Star", linkUrl: "/bonus", color: "#F59E0B", sortOrder: 3 },

@@ -1,19 +1,19 @@
 import { PolicyLayout, ContactBlock } from "@/components/layout/PolicyLayout/PolicyLayout";
 
-export const metadata = { title: "Privacy Policy — AvontShop" };
+export const metadata = { title: "Privacy Policy — ElenElectro" };
 
 export default function PrivacyPolicyPage() {
   return (
     <PolicyLayout title="Privacy Policy" lastUpdated="29 May 2026">
       <p>
-        This Privacy Policy explains how AVONTRA LTD, trading as AvontShop, collects, uses, stores, shares,
-        and protects personal data when you visit www.avontshop.com, create an account, place an order,
+        This Privacy Policy explains how AVONTRA LTD, trading as ElenElectro, collects, uses, stores, shares,
+        and protects personal data when you visit www.elenelectro.com, create an account, place an order,
         contact us, use our services, or otherwise interact with us.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In this Privacy Policy, &ldquo;AvontShop&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or
+        In this Privacy Policy, &ldquo;ElenElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or
         &ldquo;our&rdquo; means AVONTRA LTD. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or
         &ldquo;your&rdquo; means any person using the Website, placing an order, creating an account,
         contacting us, or interacting with our services.
@@ -59,7 +59,7 @@ export default function PrivacyPolicyPage() {
       </p>
 
       <h2>3. Personal Data We Collect</h2>
-      <p>3.1 The personal data we collect depends on how you interact with AvontShop.</p>
+      <p>3.1 The personal data we collect depends on how you interact with ElenElectro.</p>
       <p>3.2 We may collect and process the following categories of personal data.</p>
 
       <h3>3.2.1 Identity and Contact Data</h3>
@@ -411,7 +411,7 @@ export default function PrivacyPolicyPage() {
       </p>
       <p>
         8.3 You can unsubscribe from marketing communications at any time by using the unsubscribe link in
-        the relevant email or contacting us at info@avontshop.com.
+        the relevant email or contacting us at info@elenelectro.com.
       </p>
       <p>
         8.4 Even if you unsubscribe from marketing, we may still send you service messages, such as order
@@ -467,7 +467,7 @@ export default function PrivacyPolicyPage() {
 
       <h2>11. International Data Transfers</h2>
       <p>
-        11.1 Because AvontShop sells internationally and uses third-party service providers, your personal
+        11.1 Because ElenElectro sells internationally and uses third-party service providers, your personal
         data may be processed outside the United Kingdom, the European Economic Area, or your country of
         residence.
       </p>
@@ -571,7 +571,7 @@ export default function PrivacyPolicyPage() {
         14.2 These rights are not absolute and may be subject to legal conditions, exemptions, identity
         verification, and our legal obligations.
       </p>
-      <p>14.3 To exercise your rights, please contact us at info@avontshop.com.</p>
+      <p>14.3 To exercise your rights, please contact us at info@elenelectro.com.</p>
       <p>14.4 We may need to verify your identity before responding to a request.</p>
       <p>
         14.5 We aim to respond to valid data protection requests within the timeframe required by applicable
@@ -581,7 +581,7 @@ export default function PrivacyPolicyPage() {
       <h2>15. Complaints</h2>
       <p>
         15.1 If you have concerns about how we handle your personal data, please contact us first at
-        info@avontshop.com so we can try to resolve the matter.
+        info@elenelectro.com so we can try to resolve the matter.
       </p>
       <p>
         15.2 If you are in the United Kingdom, you have the right to lodge a complaint with the Information
@@ -629,7 +629,7 @@ export default function PrivacyPolicyPage() {
       <p>18.2 We do not knowingly collect personal data from children.</p>
       <p>
         18.3 If you believe that a child has provided personal data to us, please contact us at
-        info@avontshop.com and we will take appropriate steps to review and delete the information where
+        info@elenelectro.com and we will take appropriate steps to review and delete the information where
         required.
       </p>
 

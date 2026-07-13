@@ -290,9 +290,9 @@ export default function HomepageAdminPage() {
             style={{
               display: "flex", alignItems: "center", gap: "0.375rem",
               padding: "0.5rem 1rem", borderRadius: "6px",
-              border: activeTab === t.key ? "2px solid #E53935" : "1px solid #e0e0e0",
+              border: activeTab === t.key ? "2px solid #1B4DFF" : "1px solid #e0e0e0",
               background: activeTab === t.key ? "#FFF5F5" : "#fff",
-              color: activeTab === t.key ? "#E53935" : "#555",
+              color: activeTab === t.key ? "#1B4DFF" : "#555",
               fontSize: "0.8125rem", fontWeight: 600, cursor: "pointer",
             }}
           >
@@ -310,7 +310,7 @@ export default function HomepageAdminPage() {
           onClick={() => openCreate(activeTab)}
           style={{
             display: "flex", alignItems: "center", gap: "0.25rem",
-            padding: "0.4rem 0.75rem", background: "#E53935", color: "#fff",
+            padding: "0.4rem 0.75rem", background: "#1B4DFF", color: "#fff",
             border: "none", borderRadius: "6px", fontSize: "0.8125rem",
             fontWeight: 600, cursor: "pointer",
           }}
@@ -373,7 +373,7 @@ function ItemRow({ title, subtitle, active, onEdit, onDelete, onToggle, badges }
       <button onClick={onEdit} style={{ background: "none", border: "none", cursor: "pointer", color: "#555", padding: "4px" }}>
         <Save size={16} />
       </button>
-      <button onClick={onDelete} style={{ background: "none", border: "none", cursor: "pointer", color: "#E53935", padding: "4px" }}>
+      <button onClick={onDelete} style={{ background: "none", border: "none", cursor: "pointer", color: "#1B4DFF", padding: "4px" }}>
         <Trash2 size={16} />
       </button>
     </div>
@@ -431,7 +431,7 @@ function renderPromoStripList(items: PromoStripItemData[], onEdit: (i: PromoStri
   return items.map((i) => (
     <ItemRow key={i.id} title={i.title} subtitle={i.subtitle || ""} active={i.isActive}
       onEdit={() => onEdit(i)} onDelete={() => onDelete(i.id)} onToggle={() => onToggle(i.id, i.isActive)}
-      badges={[{ label: i.icon, color: "#E53935" }]}
+      badges={[{ label: i.icon, color: "#1B4DFF" }]}
     />
   ));
 }
@@ -581,7 +581,7 @@ function EditModal({ type, item, onClose, onSave }: {
           <button onClick={onClose} style={{ padding: "0.5rem 1rem", background: "#f5f5f5", border: "1px solid #e0e0e0", borderRadius: "6px", cursor: "pointer", fontSize: "0.8125rem" }}>
             Cancel
           </button>
-          <button onClick={() => onSave(form)} style={{ padding: "0.5rem 1rem", background: "#E53935", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontSize: "0.8125rem", fontWeight: 600 }}>
+          <button onClick={() => onSave(form)} style={{ padding: "0.5rem 1rem", background: "#1B4DFF", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontSize: "0.8125rem", fontWeight: 600 }}>
             {form.id ? "Save Changes" : "Create"}
           </button>
         </div>

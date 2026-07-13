@@ -1,5 +1,20 @@
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="40" height="40" rx="8" fill="#E53935"/>
-  <path d="M20 6L24 18H28L20 34L12 18H16L20 6Z" fill="#FFF" stroke="#FFF" stroke-width="0.5" stroke-linejoin="round"/>
-  <path d="M14 20H26" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="iconBg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1B4DFF"/>
+      <stop offset="100%" stop-color="#0C2685"/>
+    </linearGradient>
+    <linearGradient id="iconSpark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00D4E0"/>
+      <stop offset="100%" stop-color="#10D4DA"/>
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="10" fill="url(#iconBg)"/>
+  <rect x="1" y="1" width="38" height="38" rx="9" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <path d="M13 10 L13 30" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M13 10 L26 10" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M13 20 L22 20" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M13 30 L26 30" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="28.5" cy="20" r="4.5" fill="#00D4E0" fill-opacity="0.22"/>
+  <circle cx="28.5" cy="20" r="2.6" fill="url(#iconSpark)"/>
 </svg>

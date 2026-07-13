@@ -62,7 +62,7 @@ export function CurrencySwitcher() {
                 fontWeight: c.code === currency ? 700 : 500,
                 textAlign: "left",
                 background: c.code === currency ? "var(--color-accent-light, #FFF0F0)" : "transparent",
-                color: c.code === currency ? "var(--color-accent, #E53935)" : "var(--color-text, #333)",
+                color: c.code === currency ? "var(--color-accent, #1B4DFF)" : "var(--color-text, #333)",
                 border: "none",
                 cursor: "pointer",
               }}

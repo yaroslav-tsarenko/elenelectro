@@ -5,9 +5,9 @@ import { Truck, ShieldCheck, RotateCcw, Headphones } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
 const items = [
-  { icon: Truck, label: "Free Shipping", desc: "On orders over €100", color: "rgba(16, 185, 129, 0.12)", iconColor: "#059669" },
-  { icon: ShieldCheck, label: "Secure Payment", desc: "100% protected checkout", color: "rgba(79, 70, 229, 0.12)", iconColor: "#4f46e5" },
-  { icon: RotateCcw, label: "Easy Returns", desc: "30-day return policy", color: "rgba(245, 158, 11, 0.14)", iconColor: "#d97706" },
+  { icon: Truck, label: "Free Shipping", desc: "On orders over €100", color: "rgba(79, 112, 255, 0.12)", iconColor: "#1B4DFF" },
+  { icon: ShieldCheck, label: "Secure Payment", desc: "100% protected checkout", color: "rgba(27, 77, 255, 0.12)", iconColor: "#1B4DFF" },
+  { icon: RotateCcw, label: "Easy Returns", desc: "30-day return policy", color: "rgba(0, 212, 224, 0.14)", iconColor: "#d97706" },
   { icon: Headphones, label: "24/7 Support", desc: "We're always here to help", color: "rgba(6, 182, 212, 0.14)", iconColor: "#0891b2" },
 ];
 

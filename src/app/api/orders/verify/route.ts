@@ -79,8 +79,8 @@ export async function GET(request: NextRequest) {
       if (hubToken) {
         const shipping = (updatedOrder.shippingAddress as any) || {};
         const hubPayload = {
-          site_name: "Avont Shop",
-          site_url: "https://www.avontshop.com/",
+          site_name: "ElenElectro",
+          site_url: "https://www.elenelectro.com/",
           order_id: updatedOrder.id,
           admin_url: "",
           billing: {

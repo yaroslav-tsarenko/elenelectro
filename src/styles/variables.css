@@ -1,5 +1,6 @@
 /*
- * AvontShop Design Tokens — "Electric Indigo" palette for the electronics store.
+ * ElenElectro Design Tokens — "Electric Voltage" palette for the electrical materials store.
+ * Modern electro-tech style: deep electric blue primary, vivid cyan/teal accent, navy surfaces.
  * These CSS variables are the single source of truth for colors; Tailwind
  * @theme in globals.css and tailwind.config.ts mirror them so every utility
  * class (bg-primary, text-muted, etc.) reads the same values.
@@ -9,30 +10,55 @@
   /* ── Brand & accents ── */
   --color-primary: #0f172a;             /* deep slate, used for body text & headings */
   --color-secondary: #ffffff;
-  --color-accent: #4f46e5;              /* Electric Indigo — brand */
-  --color-accent-hover: #4338ca;
-  --color-accent-light: rgba(79, 70, 229, 0.08);
-  --color-accent-2: #06b6d4;            /* Cyan secondary accent */
-  --color-accent-3: #f43f5e;            /* Sale / discount rose */
+  --color-accent: #1B4DFF;              /* Electric blue — primary brand */
+  --color-accent-hover: #1740D9;
+  --color-accent-light: rgba(27, 77, 255, 0.08);
+  --color-accent-2: #00D4E0;            /* Cyan/teal secondary accent */
+  --color-accent-3: #ef4444;            /* Sale / discount red */
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
-  --color-info: #06b6d4;
+  --color-info: #0EA5E9;
+
+  /* ── Primary scale (electric blue) ── */
+  --color-primary-50:  #EFF3FF;
+  --color-primary-100: #DBE4FF;
+  --color-primary-200: #B3C4FF;
+  --color-primary-300: #8299FF;
+  --color-primary-400: #4F70FF;
+  --color-primary-500: #1B4DFF;
+  --color-primary-600: #1740D9;
+  --color-primary-700: #1234AC;
+  --color-primary-800: #0C2685;
+  --color-primary-900: #071A5C;
+
+  /* ── Accent scale (cyan/teal) ── */
+  --color-accent-50:  #E6FBFC;
+  --color-accent-100: #B9F3F5;
+  --color-accent-200: #7CE7EB;
+  --color-accent-300: #3FDCE1;
+  --color-accent-400: #10D4DA;
+  --color-accent-500: #00D4E0;
+  --color-accent-600: #00A9B3;
+  --color-accent-700: #007E85;
+  --color-accent-800: #005259;
+  --color-accent-900: #002B2F;
 
   /* ── Gradients ── */
-  --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
-  --gradient-accent: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
-  --gradient-warm: linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%);
-  --gradient-cool: linear-gradient(135deg, #06b6d4 0%, #4f46e5 100%);
-  --gradient-hero: linear-gradient(135deg, #eef2ff 0%, #ecfeff 40%, #f0f9ff 75%, #f5f3ff 100%);
-  --gradient-card-hover: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
-  --gradient-badge: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+  --gradient-primary: linear-gradient(135deg, #1B4DFF 0%, #4F70FF 50%, #00D4E0 100%);
+  --gradient-accent: linear-gradient(135deg, #1B4DFF 0%, #00D4E0 100%);
+  --gradient-warm: linear-gradient(135deg, #ef4444 0%, #f59e0b 100%);
+  --gradient-cool: linear-gradient(135deg, #00D4E0 0%, #1B4DFF 100%);
+  --gradient-hero: linear-gradient(135deg, #EFF3FF 0%, #DBE4FF 40%, #E6FBFC 75%, #EFF3FF 100%);
+  --gradient-card-hover: linear-gradient(135deg, rgba(27, 77, 255, 0.05) 0%, rgba(0, 212, 224, 0.05) 100%);
+  --gradient-badge: linear-gradient(135deg, #ef4444 0%, #fb7185 100%);
 
   /* ── Surfaces ── */
   --color-bg: #ffffff;
   --color-bg-secondary: #f8fafc;
   --color-bg-tertiary: #f1f5f9;
-  --color-bg-warm: #eff6ff;
+  --color-bg-warm: #EFF3FF;
+  --color-surface-dark: #0B1530;         /* rich navy dark surface for hero/cards */
 
   /* ── Text ── */
   --color-text: #0f172a;
@@ -44,13 +70,13 @@
   --color-border-hover: #cbd5e1;
 
   /* ── Shadows ── */
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
-  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.03);
-  --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
-  --shadow-xl: 0 24px 60px rgba(15, 23, 42, 0.1), 0 8px 20px rgba(15, 23, 42, 0.05);
-  --shadow-accent: 0 8px 30px rgba(79, 70, 229, 0.22);
-  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.04), 0 0 1px rgba(15, 23, 42, 0.06);
-  --shadow-card-hover: 0 12px 32px rgba(15, 23, 42, 0.1), 0 4px 8px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(11, 21, 48, 0.04), 0 1px 2px rgba(11, 21, 48, 0.02);
+  --shadow-md: 0 4px 16px rgba(11, 21, 48, 0.06), 0 2px 4px rgba(11, 21, 48, 0.03);
+  --shadow-lg: 0 12px 40px rgba(11, 21, 48, 0.08), 0 4px 12px rgba(11, 21, 48, 0.04);
+  --shadow-xl: 0 24px 60px rgba(11, 21, 48, 0.1), 0 8px 20px rgba(11, 21, 48, 0.05);
+  --shadow-accent: 0 8px 30px rgba(27, 77, 255, 0.22);
+  --shadow-card: 0 2px 8px rgba(11, 21, 48, 0.04), 0 0 1px rgba(11, 21, 48, 0.06);
+  --shadow-card-hover: 0 12px 32px rgba(11, 21, 48, 0.1), 0 4px 8px rgba(11, 21, 48, 0.04);
 
   /* ── Radii ── */
   --radius-sm: 0.5rem;
@@ -72,33 +98,43 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* ── Promo tints ── */
-  --promo-bg-blue: #eef2ff;
-  --promo-bg-warm: #fff7ed;
-  --promo-bg-green: #ecfdf5;
+  --promo-bg-blue: #EFF3FF;
+  --promo-bg-warm: #FFF7ED;
+  --promo-bg-green: #E6FBFC;
+
+  /* ── Selection ── */
+  --selection-bg: rgba(27, 77, 255, 0.18);
+  --selection-fg: #071A5C;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
 }
 
 [data-theme="dark"] {
   --color-primary: #f1f5f9;
-  --color-secondary: #0b0f19;
-  --color-accent: #6366f1;
-  --color-accent-hover: #818cf8;
-  --color-accent-light: rgba(99, 102, 241, 0.16);
-  --color-accent-2: #22d3ee;
+  --color-secondary: #0B1530;
+  --color-accent: #4F70FF;
+  --color-accent-hover: #8299FF;
+  --color-accent-light: rgba(79, 112, 255, 0.16);
+  --color-accent-2: #10D4DA;
   --color-accent-3: #fb7185;
 
-  --gradient-hero: linear-gradient(135deg, #111827 0%, #0f172a 40%, #1e1b4b 75%, #0f172a 100%);
-  --gradient-card-hover: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(34, 211, 238, 0.08) 100%);
+  --gradient-hero: linear-gradient(135deg, #0B1530 0%, #0C2685 40%, #071A5C 75%, #0B1530 100%);
+  --gradient-card-hover: linear-gradient(135deg, rgba(79, 112, 255, 0.1) 0%, rgba(16, 212, 218, 0.08) 100%);
 
-  --color-bg: #0b0f19;
-  --color-bg-secondary: #111827;
-  --color-bg-tertiary: #1f2937;
-  --color-bg-warm: #1e1b4b;
+  --color-bg: #0B1530;
+  --color-bg-secondary: #111c3a;
+  --color-bg-tertiary: #1a2547;
+  --color-bg-warm: #0C2685;
+  --color-surface-dark: #050B1F;
 
   --color-text: #f1f5f9;
   --color-text-secondary: #94a3b8;
   --color-text-tertiary: #64748b;
 
-  --color-border: #1f2937;
+  --color-border: #1a2547;
   --color-border-hover: #334155;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -107,9 +143,12 @@
   --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.25);
   --shadow-card-hover: 0 12px 32px rgba(0, 0, 0, 0.35);
-  --shadow-accent: 0 8px 30px rgba(99, 102, 241, 0.35);
+  --shadow-accent: 0 8px 30px rgba(79, 112, 255, 0.35);
 
-  --promo-bg-blue: #1e1b4b;
+  --promo-bg-blue: #0C2685;
   --promo-bg-warm: #1c1917;
-  --promo-bg-green: #0f1e18;
+  --promo-bg-green: #005259;
+
+  --selection-bg: rgba(79, 112, 255, 0.28);
+  --selection-fg: #f1f5f9;
 }

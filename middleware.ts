@@ -8,9 +8,9 @@ const intlMiddleware = createMiddleware(routing);
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname.endsWith("/avontshop.html")) {
+  if (pathname.endsWith("/elenelectro.html")) {
     const url = request.nextUrl.clone();
-    url.pathname = "/avontshop.html";
+    url.pathname = "/elenelectro.html";
     return NextResponse.rewrite(url);
   }
 

@@ -6,7 +6,7 @@ const STATUS_COLORS: Record<string, string> = {
   PENDING: "#F59E0B",
   CONFIRMED: "#0A84FF",
   PROCESSING: "#8b5cf6",
-  SHIPPED: "#06b6d4",
+  SHIPPED: "#00D4E0",
   DELIVERED: "#00C853",
   CANCELLED: "#EF4444",
   REFUNDED: "#71717a",

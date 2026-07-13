@@ -109,7 +109,7 @@ export function MarketplaceProductCard({ product }: Props) {
         </h4>
         <div className="flex items-center gap-px mb-2">
           {[1, 2, 3, 4, 5].map((s) => (
-            <Star key={s} size={11} fill={s <= 4 ? "#f59e0b" : "none"} stroke={s <= 4 ? "#f59e0b" : "#cbd5e1"} />
+            <Star key={s} size={11} fill={s <= 4 ? "#00D4E0" : "none"} stroke={s <= 4 ? "#00D4E0" : "#cbd5e1"} />
           ))}
           <span className="text-[0.65rem] text-ink-subtle ml-1">(12)</span>
         </div>

@@ -187,7 +187,7 @@ export default async function HomePage() {
         data={{
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "AvontShop",
+          name: "ElenElectro",
           url: siteUrl,
           description: "Your trusted source for electrical materials, wiring, and installation supplies.",
         }}

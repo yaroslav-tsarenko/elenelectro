@@ -1,7 +1,7 @@
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Link } from "@/i18n/routing";
 
-export const metadata = { title: "Policies — AvontShop" };
+export const metadata = { title: "Policies — ElenElectro" };
 
 const policies = [
   { label: "Terms and Conditions", href: "/policies/terms" },
@@ -21,7 +21,7 @@ export default function PoliciesIndexPage() {
         Policies
       </h1>
       <p style={{ lineHeight: 1.7, color: "var(--color-text-secondary)", marginBottom: "1.5rem", fontSize: "0.9375rem" }}>
-        Please review our policies below. These policies govern your use of the AvontShop website and
+        Please review our policies below. These policies govern your use of the ElenElectro website and
         any purchases made through it.
       </p>
       <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>

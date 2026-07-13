@@ -47,7 +47,7 @@ const errorStyle: React.CSSProperties = {
 };
 
 const CONTACT_INFO = [
-  { icon: Mail, title: "Email Us", detail: "info@avontshop.com", sub: "We reply within 24 hours" },
+  { icon: Mail, title: "Email Us", detail: "info@elenelectro.com", sub: "We reply within 24 hours" },
   { icon: Phone, title: "Call Us", detail: "+44 7360 545980", sub: "Mon-Fri 9:00-18:00 GMT" },
   { icon: MapPin, title: "Our Office", detail: "London, United Kingdom", sub: "AVONTRA LTD", tooltip: "Dept 6735, 196 High Road, Wood Green, London, N22 8HH, UK\nCompany No. 17245887" },
   { icon: Clock, title: "Working Hours", detail: "Mon-Fri 9:00-18:00", sub: "Sat 10:00-14:00" },
@@ -94,7 +94,7 @@ export default function ContactPage() {
       <style>{`
         .contact-input:focus {
           border-color: var(--color-accent) !important;
-          box-shadow: 0 0 0 3px rgba(229,57,53,0.1) !important;
+          box-shadow: 0 0 0 3px rgba(27,77,255,0.1) !important;
         }
       `}</style>
       <Breadcrumbs items={[{ label: nav("home"), href: "/" }, { label: t("title") }]} />
@@ -347,7 +347,7 @@ export default function ContactPage() {
             color: "#fff",
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.875rem" }}>
-              <Clock size={18} style={{ color: "#E53935" }} />
+              <Clock size={18} style={{ color: "#1B4DFF" }} />
               <h3 style={{ fontSize: "0.9375rem", fontWeight: 700 }}>Response Times</h3>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>

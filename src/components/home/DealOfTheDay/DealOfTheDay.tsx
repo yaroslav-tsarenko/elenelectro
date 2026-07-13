@@ -44,7 +44,7 @@ export function DealOfTheDay({ product }: Props) {
   return (
     <motion.section
       ref={ref}
-      className="mb-6 rounded-lg overflow-hidden bg-[linear-gradient(135deg,#0f172a_0%,#312e81_50%,#0f172a_100%)] text-white flex flex-col md:flex-row items-stretch border border-white/5 relative before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_80%_30%,rgba(99,102,241,0.25)_0%,transparent_60%),radial-gradient(circle_at_20%_80%,rgba(244,63,94,0.12)_0%,transparent_50%)] before:pointer-events-none"
+      className="mb-6 rounded-lg overflow-hidden bg-[linear-gradient(135deg,#0f172a_0%,#0B1530_50%,#0f172a_100%)] text-white flex flex-col md:flex-row items-stretch border border-white/5 relative before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_80%_30%,rgba(79,112,255,0.25)_0%,transparent_60%),radial-gradient(circle_at_20%_80%,rgba(244,63,94,0.12)_0%,transparent_50%)] before:pointer-events-none"
       initial={{ opacity: 0, scale: 0.97 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.5 }}
@@ -76,7 +76,7 @@ export function DealOfTheDay({ product }: Props) {
           Limited time offer — grab it before the deal expires!
         </p>
         <div className="flex items-baseline gap-3 mb-5">
-          <span className="text-[1.75rem] max-md:text-[1.375rem] font-extrabold text-[#fbbf24]">
+          <span className="text-[1.75rem] max-md:text-[1.375rem] font-extrabold text-[#10D4DA]">
             {formatPrice(Number(product.price))}
           </span>
           {product.comparePrice && (

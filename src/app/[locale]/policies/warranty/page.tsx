@@ -1,18 +1,18 @@
 import { PolicyLayout, ContactBlock } from "@/components/layout/PolicyLayout/PolicyLayout";
 
-export const metadata = { title: "Warranty Policy — AvontShop" };
+export const metadata = { title: "Warranty Policy — ElenElectro" };
 
 export default function WarrantyPolicyPage() {
   return (
     <PolicyLayout title="Warranty Policy" lastUpdated="29 May 2026">
       <p>
         This Warranty Policy explains how statutory rights, legal guarantees, manufacturer warranties, and
-        paid Additional Warranty options apply to products purchased through www.avontshop.com.
+        paid Additional Warranty options apply to products purchased through www.elenelectro.com.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In this Policy, &ldquo;AvontShop&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
+        In this Policy, &ldquo;ElenElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
         means AVONTRA LTD. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
         person or business purchasing goods through the Website.
       </p>
@@ -27,9 +27,9 @@ export default function WarrantyPolicyPage() {
       </p>
 
       <h2>1. Scope of This Policy</h2>
-      <p>1.1 This Policy applies to physical goods purchased through AvontShop.</p>
+      <p>1.1 This Policy applies to physical goods purchased through ElenElectro.</p>
       <p>
-        1.2 AvontShop supplies electrical products, electrical materials, wiring accessories,
+        1.2 ElenElectro supplies electrical products, electrical materials, wiring accessories,
         lighting-related products, installation components, distribution and circuit protection products,
         sockets, switches, cables, mounting accessories, and related goods.
       </p>
@@ -95,7 +95,7 @@ export default function WarrantyPolicyPage() {
 
       <h2>5. Manufacturer Warranty</h2>
       <p>5.1 Some products may come with a manufacturer warranty.</p>
-      <p>5.2 Manufacturer warranty terms are set by the manufacturer, not by AvontShop.</p>
+      <p>5.2 Manufacturer warranty terms are set by the manufacturer, not by ElenElectro.</p>
       <p>
         5.3 Manufacturer warranties may vary by product, brand, country, product type, installation
         requirements, and usage conditions.
@@ -112,7 +112,7 @@ export default function WarrantyPolicyPage() {
         <li>return or inspection of the product.</li>
       </ul>
       <p>
-        5.5 AvontShop may assist with manufacturer warranty claims where reasonable, but we do not control
+        5.5 ElenElectro may assist with manufacturer warranty claims where reasonable, but we do not control
         manufacturer decisions, warranty processing times, inspection results, replacement availability, or
         repair procedures.
       </p>
@@ -122,7 +122,7 @@ export default function WarrantyPolicyPage() {
       </p>
 
       <h2>6. Paid Additional Warranty</h2>
-      <p>6.1 AvontShop may offer paid Additional Warranty options for selected products.</p>
+      <p>6.1 ElenElectro may offer paid Additional Warranty options for selected products.</p>
       <p>6.2 Additional Warranty is optional and may be selected at checkout where available.</p>
       <p>
         6.3 Additional Warranty provides commercial warranty protection in addition to your statutory rights.
@@ -238,7 +238,7 @@ export default function WarrantyPolicyPage() {
       </ul>
       <p>
         9.3 Warranty does not cover defects or damage caused after delivery by events outside
-        AvontShop&rsquo;s control.
+        ElenElectro&rsquo;s control.
       </p>
 
       <h2>10. Electrical Installation Responsibility</h2>
@@ -276,7 +276,7 @@ export default function WarrantyPolicyPage() {
       </p>
 
       <h2>11. How to Make a Warranty Claim</h2>
-      <p>11.1 To make a warranty claim, contact us at info@avontshop.com.</p>
+      <p>11.1 To make a warranty claim, contact us at info@elenelectro.com.</p>
       <p>11.2 Please provide:</p>
       <ul>
         <li>your full name;</li>
@@ -303,7 +303,7 @@ export default function WarrantyPolicyPage() {
 
       <h2>12. Inspection and Assessment</h2>
       <p>
-        12.1 Warranty claims may require inspection by AvontShop, the manufacturer, supplier, service
+        12.1 Warranty claims may require inspection by ElenElectro, the manufacturer, supplier, service
         provider, or another authorised party.
       </p>
       <p>12.2 We may require you to return the product for inspection before approving a remedy.</p>
@@ -334,7 +334,7 @@ export default function WarrantyPolicyPage() {
       <p>13.2 We will provide return instructions where a return is required.</p>
       <p>
         13.3 For valid warranty claims involving faulty, damaged, or non-conforming goods, return shipping
-        may be covered by AvontShop where required by law or approved by us.
+        may be covered by ElenElectro where required by law or approved by us.
       </p>
       <p>
         13.4 If a warranty claim is rejected because the defect is not covered, you may be responsible for
@@ -386,7 +386,7 @@ export default function WarrantyPolicyPage() {
       <p>
         16.1 If you validly cancel or return a product before the Additional Warranty begins and the product
         refund is approved, the related Additional Warranty charge may also be refunded where required by
-        law or approved by AvontShop.
+        law or approved by ElenElectro.
       </p>
       <p>
         16.2 If the Additional Warranty has already begun or has already been used for a claim, it may not
@@ -411,7 +411,7 @@ export default function WarrantyPolicyPage() {
         except where mandatory law provides otherwise.
       </p>
       <p>
-        17.4 To the fullest extent permitted by law, AvontShop will not be liable to Business Customers for
+        17.4 To the fullest extent permitted by law, ElenElectro will not be liable to Business Customers for
         labour costs, electrician costs, contractor costs, testing costs, removal costs, reinstallation
         costs, certification costs, project delays, downtime, loss of profit, loss of contract, loss of
         revenue, loss of business opportunity, or indirect or consequential losses arising from a warranty

@@ -56,7 +56,7 @@ interface GeneratedData {
   characteristics: Record<string, Record<string, string>>;
 }
 
-const SYSTEM_PROMPT = `You are a product data specialist for an electrical materials e-commerce store (AvontShop) based in Europe.
+const SYSTEM_PROMPT = `You are a product data specialist for an electrical materials e-commerce store (ElenElectro) based in Europe.
 
 Your task: generate accurate, realistic product descriptions and technical characteristics for electrical products.
 
