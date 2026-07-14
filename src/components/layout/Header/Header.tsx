@@ -16,6 +16,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { AnimatePresence, motion } from "framer-motion";
 import { ElenLogo } from "../ElenLogo";
 import { CurrencySwitcher } from "./CurrencySwitcher";
+import { cachedFetchJSON, readCached } from "@/lib/utils/reliable-fetch";
 
 interface Category {
   id: string;
@@ -77,7 +78,9 @@ export function Header() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>(() => {
+    return readCached<Category[]>({ cacheKey: "header:categories", storage: "session" }) || [];
+  });
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 
@@ -97,8 +100,10 @@ export function Header() {
   }, [mobileOpen]);
 
   useEffect(() => {
-    fetch("/api/categories")
-      .then((r) => r.json())
+    cachedFetchJSON<Category[]>("/api/categories", {
+      cacheKey: "header:categories",
+      storage: "session",
+    })
       .then((data) => { if (Array.isArray(data)) setCategories(data); })
       .catch(() => {});
   }, []);

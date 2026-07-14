@@ -28,7 +28,13 @@ export async function GET(
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 
-    return NextResponse.json(product);
+    return NextResponse.json(product, {
+      headers: {
+        "Cache-Control": "public, s-maxage=120, stale-while-revalidate=86400",
+        "CDN-Cache-Control": "public, s-maxage=300",
+        "Vercel-CDN-Cache-Control": "public, s-maxage=300",
+      },
+    });
   } catch (error) {
     console.error("Error fetching product:", error);
     return NextResponse.json({ error: "Failed to fetch product" }, { status: 500 });

@@ -109,13 +109,22 @@ export async function GET(request: NextRequest) {
       prisma.product.count({ where }),
     ]);
 
-    return NextResponse.json({
-      data: products,
-      total,
-      page,
-      pageSize,
-      totalPages: Math.ceil(total / pageSize),
-    });
+    return NextResponse.json(
+      {
+        data: products,
+        total,
+        page,
+        pageSize,
+        totalPages: Math.ceil(total / pageSize),
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=86400",
+          "CDN-Cache-Control": "public, s-maxage=120",
+          "Vercel-CDN-Cache-Control": "public, s-maxage=120",
+        },
+      },
+    );
   } catch (error) {
     console.error("Error fetching products:", error);
     return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });

@@ -10,6 +10,7 @@ import { ProductSort } from "@/components/product/ProductSort/ProductSort";
 import { ProductSkeleton } from "@/components/product/ProductSkeleton/ProductSkeleton";
 import { EmptyState } from "@/components/shared/EmptyState/EmptyState";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { cachedFetchJSON, readCached } from "@/lib/utils/reliable-fetch";
 
 export default function CatalogPage() {
   const t = useTranslations("product");
@@ -18,13 +19,20 @@ export default function CatalogPage() {
   const router = useRouter();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<any[]>(() => {
+    const cached = readCached<{ data: any[] }>({ cacheKey: "catalog:last", storage: "session" });
+    return cached?.data || [];
+  });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>(() => {
+    return readCached<any[]>({ cacheKey: "catalog:categories", storage: "session" }) || [];
+  });
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [brands, setBrands] = useState<string[]>([]);
+  const [brands, setBrands] = useState<string[]>(() => {
+    return readCached<string[]>({ cacheKey: "catalog:brands", storage: "session" }) || [];
+  });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const page = parseInt(searchParams.get("page") || "1");
@@ -50,18 +58,15 @@ export default function CatalogPage() {
   );
 
   useEffect(() => {
-    fetch("/api/categories")
-      .then((res) => res.json())
+    cachedFetchJSON<unknown>("/api/categories", { cacheKey: "catalog:categories", storage: "session" })
       .then((data) => setCategories(Array.isArray(data) ? data : []))
       .catch(console.error);
-    fetch("/api/products/brands")
-      .then((res) => res.json())
+    cachedFetchJSON<unknown>("/api/products/brands", { cacheKey: "catalog:brands", storage: "session" })
       .then((data) => setBrands(Array.isArray(data) ? data : []))
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     const params = new URLSearchParams();
     params.set("page", String(page));
     params.set("sort", sort);
@@ -72,8 +77,25 @@ export default function CatalogPage() {
     if (onSale) params.set("onSale", "true");
     if (selectedBrand) params.set("brand", selectedBrand);
 
-    fetch(`/api/products?${params}`)
-      .then((res) => res.json())
+    const key = `catalog:products:${params.toString()}`;
+    const cached = readCached<{ data: unknown[]; total: number; totalPages: number }>({
+      cacheKey: key,
+      storage: "session",
+      ttlMs: 5 * 60 * 1000,
+    });
+    if (cached) {
+      setProducts(cached.data || []);
+      setTotal(cached.total || 0);
+      setTotalPages(cached.totalPages || 1);
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+
+    cachedFetchJSON<{ data: unknown[]; total: number; totalPages: number }>(
+      `/api/products?${params}`,
+      { cacheKey: key, storage: "session" },
+    )
       .then((data) => {
         setProducts(data.data || []);
         setTotal(data.total || 0);

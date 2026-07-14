@@ -3,6 +3,12 @@ import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { slugify } from "@/lib/utils/slugify";
 
+const CATEGORIES_CACHE_HEADERS = {
+  "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
+  "CDN-Cache-Control": "public, s-maxage=600",
+  "Vercel-CDN-Cache-Control": "public, s-maxage=600",
+};
+
 const categorySchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
@@ -23,7 +29,7 @@ export async function GET(request: NextRequest) {
         orderBy: { name: "asc" },
         include: { _count: { select: { products: true } } },
       });
-      return NextResponse.json(categories);
+      return NextResponse.json(categories, { headers: CATEGORIES_CACHE_HEADERS });
     }
 
     const categories = await prisma.category.findMany({
@@ -61,7 +67,9 @@ export async function GET(request: NextRequest) {
         }));
     }
 
-    return NextResponse.json(includeEmpty ? categories : pruneEmpty(categories));
+    return NextResponse.json(includeEmpty ? categories : pruneEmpty(categories), {
+      headers: CATEGORIES_CACHE_HEADERS,
+    });
   } catch (error) {
     console.error("Error fetching categories:", error);
     return NextResponse.json({ error: "Failed to fetch categories" }, { status: 500 });

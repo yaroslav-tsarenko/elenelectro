@@ -18,7 +18,7 @@ interface LocaleLayoutProps {
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as "en" | "lv" | "ru")) {
+  if (!routing.locales.includes(locale as "en" | "lv")) {
     notFound();
   }
 
