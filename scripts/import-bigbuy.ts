@@ -10,6 +10,8 @@ const DIRECT_URL = process.env.DIRECT_URL;
 const ISO_CODE = process.env.BIGBUY_ISO_CODE || "en";
 const ROOT_CATEGORY_ID = Number(process.env.BIGBUY_ROOT_CATEGORY || 2468);
 const LIMIT = process.env.LIMIT ? Number(process.env.LIMIT) : Infinity;
+const PRIMARY_MIN = Number(process.env.PRIMARY_MIN || 40);   // top-level category threshold
+const SUB_MIN = Number(process.env.SUB_MIN || 25);           // subcategory threshold
 const CACHE_DIR = path.join(os.tmpdir(), "bigbuy-cache");
 
 if (!BIGBUY_TOKEN) throw new Error("BIGBUY_API_PRODUCTION missing in .env");
@@ -77,12 +79,13 @@ function stripHtml(html: string, maxLen = 300): string {
   return text.length > maxLen ? text.substring(0, maxLen - 1) + "…" : text;
 }
 
-interface BbCategory { id: number; name: string; url: string; parentCategory?: number; urlImages?: string[]; }
+interface BbCategory { id: number; name: string; url: string; parentCategory?: number; }
+interface BbTaxonomy { id: number; name: string; url: string; parentTaxonomy?: number; urlImages?: string; }
+interface BbManufacturer { id: number; name: string; }
 interface BbProduct {
   id: number; sku: string; ean13: string | null; weight: number;
-  manufacturer: number | null; category: number;
+  manufacturer: number | null; category: number; taxonomy: number | null;
   wholesalePrice: number; retailPrice: number; active: number | boolean;
-  dateUpd?: string;
 }
 interface BbInfo { id: number; sku: string; name: string; description: string | null; url: string; shortDescription: string | null; }
 interface BbImages { id: number; images: Array<{ id: number; url: string; name: string; isCover: boolean; position: number; }>; }
@@ -90,35 +93,32 @@ interface BbImages { id: number; images: Array<{ id: number; url: string; name: 
 async function main() {
   console.log(`\n=== BigBuy → Neon import (root category ${ROOT_CATEGORY_ID}, isoCode=${ISO_CODE}) ===\n`);
 
-  console.log("[1/5] Fetching categories tree...");
+  console.log("[1/6] Fetching categories tree...");
   const allCats = await bbFetch(
     `${BIGBUY_URL}/rest/catalog/categories.json?isoCode=${ISO_CODE}`,
     `categories-${ISO_CODE}.json`,
   ) as BbCategory[];
-
-  const catById = new Map(allCats.map((c) => [c.id, c]));
-  const children = new Map<number, number[]>();
+  const catChildren = new Map<number, number[]>();
   for (const c of allCats) {
     if (c.parentCategory != null) {
-      if (!children.has(c.parentCategory)) children.set(c.parentCategory, []);
-      children.get(c.parentCategory)!.push(c.id);
+      if (!catChildren.has(c.parentCategory)) catChildren.set(c.parentCategory, []);
+      catChildren.get(c.parentCategory)!.push(c.id);
     }
   }
   const targetCatIds = new Set<number>();
   (function walk(id: number) {
     if (targetCatIds.has(id)) return;
     targetCatIds.add(id);
-    for (const c of children.get(id) || []) walk(c);
+    for (const c of catChildren.get(id) || []) walk(c);
   })(ROOT_CATEGORY_ID);
-  console.log(`  target category tree: ${targetCatIds.size} categories`);
+  console.log(`  target BigBuy categories: ${targetCatIds.size}`);
 
-  console.log("[2/5] Fetching all products...");
+  console.log("[2/6] Fetching all products...");
   const allProducts = await bbFetch(
     `${BIGBUY_URL}/rest/catalog/products.json`,
     "products.json",
   ) as BbProduct[];
   console.log(`  total in BigBuy: ${allProducts.length}`);
-
   let scoped = allProducts.filter((p) => targetCatIds.has(p.category) && (p.active === 1 || p.active === true));
   console.log(`  in category tree: ${scoped.length}`);
   if (scoped.length > LIMIT) {
@@ -127,27 +127,91 @@ async function main() {
   }
   const productIds = new Set(scoped.map((p) => p.id));
 
-  console.log("[3/5] Fetching product info...");
-  const allInfo = await bbFetch(
-    `${BIGBUY_URL}/rest/catalog/productsinformation.json?isoCode=${ISO_CODE}`,
-    `productsinformation-${ISO_CODE}.json`,
-  ) as BbInfo[];
+  console.log("[3/6] Fetching taxonomies, manufacturers, info, images...");
+  const [allTax, allMfg, allInfo, allImages] = await Promise.all([
+    bbFetch(`${BIGBUY_URL}/rest/catalog/taxonomies.json?isoCode=${ISO_CODE}`, `taxonomies-${ISO_CODE}.json`),
+    bbFetch(`${BIGBUY_URL}/rest/catalog/manufacturers.json?isoCode=${ISO_CODE}`, `manufacturers-${ISO_CODE}.json`),
+    bbFetch(`${BIGBUY_URL}/rest/catalog/productsinformation.json?isoCode=${ISO_CODE}`, `productsinformation-${ISO_CODE}.json`),
+    bbFetch(`${BIGBUY_URL}/rest/catalog/productsimages.json`, "productsimages.json"),
+  ]) as [BbTaxonomy[], BbManufacturer[], BbInfo[], BbImages[]];
+
+  const taxById = new Map(allTax.map((t) => [t.id, t]));
+  const mfgById = new Map(allMfg.map((m) => [m.id, m.name]));
+
   const infoById = new Map<number, BbInfo>();
   for (const info of allInfo) if (productIds.has(info.id)) infoById.set(info.id, info);
-  console.log(`  matched info for ${infoById.size}/${productIds.size} products`);
+  console.log(`  info: ${infoById.size}/${productIds.size}`);
 
-  console.log("[4/5] Fetching product images...");
-  const allImages = await bbFetch(
-    `${BIGBUY_URL}/rest/catalog/productsimages.json`,
-    "productsimages.json",
-  ) as BbImages[];
   const imagesById = new Map<number, BbImages["images"]>();
   for (const img of allImages) if (productIds.has(img.id)) imagesById.set(img.id, img.images);
-  console.log(`  matched images for ${imagesById.size} products`);
+  console.log(`  images: ${imagesById.size}`);
 
-  console.log("[5/5] Writing to Postgres...");
+  // Build ancestor chain for a taxonomy (leaf → root)
+  function ancestors(tid: number): number[] {
+    const out: number[] = [];
+    const seen = new Set<number>();
+    let cur: number | undefined = tid;
+    while (cur && taxById.has(cur) && !seen.has(cur)) {
+      seen.add(cur);
+      out.push(cur);
+      const parent = taxById.get(cur)!.parentTaxonomy;
+      cur = parent && parent > 0 ? parent : undefined;
+    }
+    return out;
+  }
+  function isRootTax(tid: number): boolean {
+    const t = taxById.get(tid);
+    return !t || !t.parentTaxonomy || t.parentTaxonomy === 0;
+  }
+
+  console.log("[4/6] Building category tree from taxonomy...");
+  // Count products per taxonomy across the whole ancestor chain
+  const taxCount = new Map<number, number>();
+  for (const p of scoped) {
+    if (!p.taxonomy) continue;
+    for (const a of ancestors(p.taxonomy)) {
+      taxCount.set(a, (taxCount.get(a) || 0) + 1);
+    }
+  }
+
+  // Primary: taxonomies whose parent is a root and count >= PRIMARY_MIN
+  const primary = new Set<number>();
+  for (const [tid, cnt] of taxCount) {
+    if (cnt < PRIMARY_MIN) continue;
+    const t = taxById.get(tid);
+    if (!t) continue;
+    if (t.parentTaxonomy && isRootTax(t.parentTaxonomy)) primary.add(tid);
+  }
+
+  // Sub: taxonomies whose parent is a primary and count >= SUB_MIN
+  const sub = new Set<number>();
+  for (const [tid, cnt] of taxCount) {
+    if (cnt < SUB_MIN) continue;
+    const t = taxById.get(tid);
+    if (!t?.parentTaxonomy) continue;
+    if (primary.has(t.parentTaxonomy)) sub.add(tid);
+  }
+
+  console.log(`  primary categories: ${primary.size}, subcategories: ${sub.size}`);
+
+  // For each scoped product, resolve its (primaryId, subId) by walking ancestors
+  const productAssign = new Map<number, { primary?: number; sub?: number }>();
+  for (const p of scoped) {
+    const chain = p.taxonomy ? ancestors(p.taxonomy) : [];
+    const assign: { primary?: number; sub?: number } = {};
+    for (const tid of chain) {
+      if (!assign.sub && sub.has(tid)) assign.sub = tid;
+      if (!assign.primary && primary.has(tid)) { assign.primary = tid; break; }
+    }
+    productAssign.set(p.id, assign);
+  }
+
+  // Count how many products end up with at least a primary
+  const withPrimary = [...productAssign.values()].filter((a) => a.primary).length;
+  console.log(`  products mapped to a primary: ${withPrimary}/${scoped.length}`);
+
+  console.log("[5/6] Writing categories to Postgres...");
   await connect();
-
   console.log("  clearing existing data...");
   await query('DELETE FROM "ProductCategory"');
   await query('DELETE FROM "ProductImage"');
@@ -156,56 +220,53 @@ async function main() {
   await query('DELETE FROM "Product"');
   await query('DELETE FROM "Category"');
 
-  console.log("  inserting categories...");
-  const usedCatIds = new Set<number>();
-  function addWithAncestors(id: number) {
-    if (usedCatIds.has(id)) return;
-    usedCatIds.add(id);
-    const parent = catById.get(id)?.parentCategory;
-    if (parent && targetCatIds.has(parent)) addWithAncestors(parent);
-  }
-  addWithAncestors(ROOT_CATEGORY_ID);
-  for (const p of scoped) addWithAncestors(p.category);
-
-  const catIdToDb = new Map<number, string>();
   const now = new Date().toISOString();
-  const orderedCats: number[] = [];
-  function addOrdered(id: number) {
-    if (orderedCats.includes(id) || !usedCatIds.has(id)) return;
-    const parent = catById.get(id)?.parentCategory;
-    if (parent && usedCatIds.has(parent)) addOrdered(parent);
-    orderedCats.push(id);
-  }
-  for (const id of usedCatIds) addOrdered(id);
-
+  const taxToDb = new Map<number, string>();
   const slugSeen = new Set<string>();
   function uniqueSlug(base: string): string {
     let s = base || "cat";
     let i = 1;
-    while (slugSeen.has(s)) { s = `${base}-${i++}`; }
+    while (slugSeen.has(s)) s = `${base}-${i++}`;
     slugSeen.add(s);
     return s;
   }
-  for (const cid of orderedCats) {
-    const c = catById.get(cid);
-    if (!c) continue;
+
+  // Insert primary categories first (sorted by product count desc for pretty sortOrder)
+  const primarySorted = [...primary].sort((a, b) => (taxCount.get(b) || 0) - (taxCount.get(a) || 0));
+  let sortOrder = 0;
+  for (const tid of primarySorted) {
+    const t = taxById.get(tid)!;
     const dbId = cuid();
-    const slug = uniqueSlug(slugify(c.url || c.name));
-    const imageUrl = c.urlImages?.find((u) => u.includes("_big")) || c.urlImages?.[0] || null;
-    const parentDbId = c.parentCategory && usedCatIds.has(c.parentCategory) ? catIdToDb.get(c.parentCategory) : null;
+    const slug = uniqueSlug(slugify(t.name));
+    await query(
+      `INSERT INTO "Category" (id, name, slug, "parentId", "imageUrl", "sortOrder", "isActive", "createdAt", "updatedAt")
+       VALUES ($1,$2,$3,NULL,$4,$5,true,$6,$6)`,
+      [dbId, t.name.trim(), slug, t.urlImages || null, sortOrder++, now],
+    );
+    taxToDb.set(tid, dbId);
+  }
+  console.log(`  inserted ${primary.size} primary categories`);
+
+  // Insert subcategories under their primary parent
+  for (const tid of sub) {
+    const t = taxById.get(tid)!;
+    const parentDbId = taxToDb.get(t.parentTaxonomy!);
+    if (!parentDbId) continue;
+    const dbId = cuid();
+    const slug = uniqueSlug(slugify(t.name));
     await query(
       `INSERT INTO "Category" (id, name, slug, "parentId", "imageUrl", "sortOrder", "isActive", "createdAt", "updatedAt")
        VALUES ($1,$2,$3,$4,$5,0,true,$6,$6)`,
-      [dbId, c.name, slug, parentDbId, imageUrl, now],
+      [dbId, t.name.trim(), slug, parentDbId, t.urlImages || null, now],
     );
-    catIdToDb.set(cid, dbId);
+    taxToDb.set(tid, dbId);
   }
-  console.log(`  inserted ${catIdToDb.size} categories`);
+  console.log(`  inserted ${sub.size} subcategories`);
 
-  console.log("  inserting products...");
+  console.log("[6/6] Writing products + links + images...");
   const prodSlugSeen = new Set<string>();
   function uniqueProdSlug(name: string, sku: string): string {
-    let base = slugify(name) || slugify(sku) || "product";
+    const base = slugify(name) || slugify(sku) || "product";
     let s = base, i = 1;
     while (prodSlugSeen.has(s)) s = `${base}-${i++}`;
     prodSlugSeen.add(s);
@@ -228,18 +289,19 @@ async function main() {
     const weight = p.weight && p.weight > 0 ? p.weight : null;
     const ean = p.ean13 && /^\d{13}$/.test(p.ean13) ? p.ean13 : null;
     const quantity = p.active === 1 || p.active === true ? 999 : 0;
+    const brand = p.manufacturer ? mfgById.get(p.manufacturer) || null : null;
     const dbId = cuid();
     skuToDbId.set(sku, dbId);
     skuToBbId.set(sku, p.id);
     rows.push([
       dbId, name, uniqueProdSlug(name, sku), sku,
       price, null, cost, quantity, description, shortDescription,
-      weight, "ACTIVE", null, ean, null, "new", null, now, now,
+      brand, weight, "ACTIVE", null, ean, null, "new", now, now,
     ]);
   }
   console.log(`  prepared ${rows.length} products`);
 
-  const cols = `id, name, slug, sku, price, "comparePrice", "costPrice", quantity, description, "shortDescription", weight, status, gtin, ean, mpn, condition, "metaTitle", "createdAt", "updatedAt"`;
+  const cols = `id, name, slug, sku, price, "comparePrice", "costPrice", quantity, description, "shortDescription", brand, weight, status, gtin, ean, mpn, condition, "createdAt", "updatedAt"`;
   const BATCH = 200;
   let inserted = 0;
   for (let i = 0; i < rows.length; i += BATCH) {
@@ -257,8 +319,7 @@ async function main() {
         values,
       );
       inserted += batch.length;
-    } catch (err) {
-      // fallback one-by-one
+    } catch {
       for (const r of batch) {
         try {
           await query(
@@ -275,12 +336,22 @@ async function main() {
   }
   console.log(`\n  inserted ${inserted} products`);
 
-  console.log("  linking product↔category...");
+  console.log("  linking products ↔ categories (primary + sub)...");
   const catLinks: { productDbId: string; categoryDbId: string }[] = [];
+  const seenLink = new Set<string>();
   for (const p of scoped) {
     const productDbId = skuToDbId.get(p.sku);
-    const categoryDbId = catIdToDb.get(p.category);
-    if (productDbId && categoryDbId) catLinks.push({ productDbId, categoryDbId });
+    if (!productDbId) continue;
+    const assign = productAssign.get(p.id) || {};
+    for (const tid of [assign.primary, assign.sub]) {
+      if (!tid) continue;
+      const categoryDbId = taxToDb.get(tid);
+      if (!categoryDbId) continue;
+      const key = `${productDbId}|${categoryDbId}`;
+      if (seenLink.has(key)) continue;
+      seenLink.add(key);
+      catLinks.push({ productDbId, categoryDbId });
+    }
   }
   for (let i = 0; i < catLinks.length; i += 500) {
     const batch = catLinks.slice(i, i + 500);
@@ -331,14 +402,15 @@ async function main() {
   const counts = await Promise.all([
     query('SELECT count(*)::int as n FROM "Product"'),
     query('SELECT count(*)::int as n FROM "Category"'),
+    query('SELECT count(*)::int as n FROM "Category" WHERE "parentId" IS NULL'),
     query('SELECT count(*)::int as n FROM "ProductImage"'),
     query('SELECT count(*)::int as n FROM "ProductCategory"'),
   ]);
   console.log(`\n=== done ===`);
   console.log(`  Products:          ${counts[0].rows[0].n}`);
-  console.log(`  Categories:        ${counts[1].rows[0].n}`);
-  console.log(`  Images:            ${counts[2].rows[0].n}`);
-  console.log(`  Product→Category:  ${counts[3].rows[0].n}`);
+  console.log(`  Categories total:  ${counts[1].rows[0].n} (top-level: ${counts[2].rows[0].n})`);
+  console.log(`  Images:            ${counts[3].rows[0].n}`);
+  console.log(`  Product↔Category:  ${counts[4].rows[0].n}`);
 
   await client.end();
 }
