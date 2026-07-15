@@ -38,6 +38,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.r2.dev",
       },
+      {
+        protocol: "https",
+        hostname: "cdnbigbuy.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.cdnbigbuy.com",
+      },
     ],
   },
   headers: async () => [
