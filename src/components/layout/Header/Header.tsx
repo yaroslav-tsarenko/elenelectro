@@ -15,7 +15,6 @@ import { useAuth } from "@/providers/AuthProvider";
 import { ThemeToggle } from "./ThemeToggle";
 import { AnimatePresence, motion } from "framer-motion";
 import { ElenLogo } from "../ElenLogo";
-import { CurrencySwitcher } from "./CurrencySwitcher";
 import { cachedFetchJSON, readCached } from "@/lib/utils/reliable-fetch";
 
 interface Category {
@@ -198,7 +197,6 @@ export function Header() {
             </Link>
 
             <ThemeToggle />
-            <CurrencySwitcher />
 
             {user && (
               <Link href="/account/wishlist" className={iconButtonCls} aria-label="Wishlist">
