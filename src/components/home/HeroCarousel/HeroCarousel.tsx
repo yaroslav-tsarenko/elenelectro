@@ -4,9 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import banner1 from "@/assets/banner1.png";
-import banner2 from "@/assets/banner2.png";
-import banner3 from "@/assets/banner3.png";
+import banner1 from "@/assets/banner1.jpg";
+import banner2 from "@/assets/banner2.jpg";
+import banner3 from "@/assets/banner3.jpg";
 
 interface SlideData {
   id: string;
