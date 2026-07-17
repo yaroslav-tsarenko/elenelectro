@@ -154,7 +154,7 @@ async function main() {
     while (cur && taxById.has(cur) && !seen.has(cur)) {
       seen.add(cur);
       out.push(cur);
-      const parent = taxById.get(cur)!.parentTaxonomy;
+      const parent: number | undefined = taxById.get(cur)!.parentTaxonomy;
       cur = parent && parent > 0 ? parent : undefined;
     }
     return out;
