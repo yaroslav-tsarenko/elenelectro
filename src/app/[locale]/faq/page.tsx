@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     q: "How do I contact customer support?",
-    a: "You can reach us via our contact form, email at support@store.com, or through live chat on our website. We're available 24/7 to help.",
+    a: "You can reach us via our contact form, email at info@elenelectro.com, or call us at +44 7360 545980. We're here to help Mon-Fri 9:00-18:00 GMT.",
   },
 ];
 

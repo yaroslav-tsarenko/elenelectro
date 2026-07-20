@@ -383,9 +383,11 @@ export async function sendOrderInvoiceEmail(data: OrderEmailData): Promise<boole
             <p style="margin:0;font-size:13px;color:${TEXT_COLOR};line-height:1.55;">
               <strong>AVONTRA LTD</strong><br />
               Company number: 17245887<br />
+              Director: Helen CHAMPION<br />
               Dept 6735, 196 High Road<br />
               Wood Green, London, N22 8HH<br />
-              United Kingdom
+              United Kingdom<br />
+              Phone: +44 7360 545980
             </p>
           </td>
           <td style="width:50%;vertical-align:top;padding-left:12px;">

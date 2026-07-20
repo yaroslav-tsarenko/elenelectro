@@ -49,7 +49,7 @@ const errorStyle: React.CSSProperties = {
 const CONTACT_INFO = [
   { icon: Mail, title: "Email Us", detail: "info@elenelectro.com", sub: "We reply within 24 hours" },
   { icon: Phone, title: "Call Us", detail: "+44 7360 545980", sub: "Mon-Fri 9:00-18:00 GMT" },
-  { icon: MapPin, title: "Our Office", detail: "London, United Kingdom", sub: "AVONTRA LTD", tooltip: "Dept 6735, 196 High Road, Wood Green, London, N22 8HH, UK\nCompany No. 17245887" },
+  { icon: MapPin, title: "Our Office", detail: "London, United Kingdom", sub: "AVONTRA LTD", tooltip: "Dept 6735, 196 High Road, Wood Green, London, N22 8HH, UK\nCompany No. 17245887\nDirector: Helen CHAMPION" },
   { icon: Clock, title: "Working Hours", detail: "Mon-Fri 9:00-18:00", sub: "Sat 10:00-14:00" },
 ];
 
@@ -364,6 +364,36 @@ export default function ContactPage() {
                 <span style={{ fontWeight: 600 }}>Within 48h</span>
               </div>
             </div>
+          </div>
+
+          {/* Company Details */}
+          <div style={{
+            padding: "1.5rem",
+            borderRadius: "var(--radius-xl)",
+            border: "1px solid var(--color-border)",
+            background: "var(--color-bg)",
+          }}>
+            <h3 style={{ fontSize: "0.9375rem", fontWeight: 700, marginBottom: "0.875rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <MapPin size={18} style={{ color: "var(--color-accent)" }} />
+              Company Details
+            </h3>
+            <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <strong style={{ color: "var(--color-text)" }}>AVONTRA LTD</strong>
+              <br />
+              Company number: 17245887
+              <br />
+              Director: Helen CHAMPION
+              <br />
+              Dept 6735, 196 High Road,
+              <br />
+              Wood Green, London,
+              <br />
+              United Kingdom, N22 8HH
+              <br />
+              Phone: <a href="tel:+447360545980" style={{ color: "var(--color-accent)", textDecoration: "none" }}>+44 7360 545980</a>
+              <br />
+              Email: <a href="mailto:info@elenelectro.com" style={{ color: "var(--color-accent)", textDecoration: "none" }}>info@elenelectro.com</a>
+            </p>
           </div>
 
           {/* Trust */}

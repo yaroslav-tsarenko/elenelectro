@@ -49,6 +49,8 @@ export function ContactBlock() {
         <br />
         Company number: 17245887
         <br />
+        Director: Helen CHAMPION
+        <br />
         Registered office: Dept 6735, 196 High Road, Wood Green, London, United Kingdom, N22 8HH
         <br />
         Phone: +44 7360 545980
