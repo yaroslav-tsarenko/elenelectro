@@ -83,21 +83,40 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-line py-6 flex flex-col md:flex-row items-center gap-4 md:justify-between">
-          <p className="text-xs text-ink-subtle">
+        <div className="border-t border-line py-6 flex flex-col gap-4 text-xs text-ink-subtle leading-[1.7]">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 md:items-start">
+            <div>
+              <p className="font-semibold text-ink mb-1">AVONTRA LTD</p>
+              <p>
+                Company number: 17245887 &middot; Director: Helen CHAMPION
+                <br />
+                Dept 6735, 196 High Road, Wood Green, London, United Kingdom, N22 8HH
+                <br />
+                Phone:{" "}
+                <a href="tel:+447360545980" className="hover:text-brand transition-colors">
+                  +44 7360 545980
+                </a>
+                {" "}&middot; Email:{" "}
+                <a href="mailto:info@elenelectro.com" className="hover:text-brand transition-colors">
+                  info@elenelectro.com
+                </a>
+              </p>
+            </div>
+            <div className="flex items-center gap-3 md:justify-end">
+              <span className="flex items-center justify-center">
+                <Image src={visaLogo} alt="Visa" height={100} width={100} className="!w-[60px] !h-auto object-contain" />
+              </span>
+              <span className="flex items-center justify-center">
+                <Image src={mastercardLogo} alt="Mastercard" height={100} width={100} className="!w-[60px] !h-auto object-contain" />
+              </span>
+              <span className="flex items-center justify-center">
+                <Image src={pciDssLogo} alt="PCI DSS Compliant" height={100} width={100} className="!w-[60px] !h-auto object-contain" />
+              </span>
+            </div>
+          </div>
+          <p className="text-ink-subtle">
             {t("copyright", { year: currentYear, storeName: "ElenElectro" })}
           </p>
-          <div className="flex items-center gap-3">
-            <span className="flex items-center justify-center">
-              <Image src={visaLogo} alt="Visa" height={100} width={100} className="!w-[60px] !h-auto object-contain" />
-            </span>
-            <span className="flex items-center justify-center">
-              <Image src={mastercardLogo} alt="Mastercard" height={100} width={100} className="!w-[60px] !h-auto object-contain" />
-            </span>
-            <span className="flex items-center justify-center">
-              <Image src={pciDssLogo} alt="PCI DSS Compliant" height={100} width={100} className="!w-[60px] !h-auto object-contain" />
-            </span>
-          </div>
         </div>
       </div>
     </footer>
