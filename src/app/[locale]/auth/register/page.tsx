@@ -577,7 +577,7 @@ export default function RegisterPage() {
         </form>
 
         <p className="text-center mt-7 text-sm text-ink-muted [&_a]:text-brand [&_a]:font-semibold [&_a]:no-underline [&_a]:transition-opacity hover:[&_a]:opacity-80">
-          {t("haveAccount")}{" "}
+          {t("hasAccount")}{" "}
           <Link href="/auth/login">{t("signIn")}</Link>
         </p>
       </motion.div>
