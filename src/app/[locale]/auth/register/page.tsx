@@ -35,6 +35,7 @@ interface FormData {
   dateOfBirth: string;
   password: string;
   confirmPassword: string;
+  acceptedPolicies: boolean;
 }
 
 const initialForm: FormData = {
@@ -49,6 +50,7 @@ const initialForm: FormData = {
   dateOfBirth: "",
   password: "",
   confirmPassword: "",
+  acceptedPolicies: false,
 };
 
 export default function RegisterPage() {
@@ -94,6 +96,7 @@ export default function RegisterPage() {
       if (!form.password) errs.password = "Password is required";
       else if (form.password.length < 6) errs.password = "Min 6 characters";
       if (form.password !== form.confirmPassword) errs.confirmPassword = "Passwords do not match";
+      if (!form.acceptedPolicies) errs.acceptedPolicies = "You must accept the Terms and Conditions and the Privacy Policy";
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -539,11 +542,26 @@ export default function RegisterPage() {
                   {renderError("confirmPassword")}
                 </div>
 
-                <p className="text-[0.8125rem] text-ink-subtle leading-[1.5] m-0 [&_a]:text-brand [&_a]:no-underline hover:[&_a]:underline">
-                  By creating an account, you agree to our{" "}
-                  <Link href="/policies/terms">Terms of Service</Link> and{" "}
-                  <Link href="/policies/privacy">Privacy Policy</Link>.
-                </p>
+                <div className="flex flex-col gap-1.5">
+                  <label className="flex items-start gap-2.5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={form.acceptedPolicies}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setForm((prev) => ({ ...prev, acceptedPolicies: checked }));
+                        setErrors((prev) => ({ ...prev, acceptedPolicies: undefined }));
+                      }}
+                      className="w-[1.125rem] h-[1.125rem] mt-0.5 shrink-0 cursor-pointer accent-brand"
+                    />
+                    <span className="text-[0.8125rem] text-ink-muted leading-[1.5] [&_a]:text-brand [&_a]:font-semibold [&_a]:no-underline hover:[&_a]:underline">
+                      I have read and agree to the{" "}
+                      <Link href="/policies/terms" target="_blank">Terms and Conditions</Link> and the{" "}
+                      <Link href="/policies/privacy" target="_blank">Privacy Policy</Link>. *
+                    </span>
+                  </label>
+                  {renderError("acceptedPolicies")}
+                </div>
 
                 <div style={{ display: "flex", gap: "0.75rem" }} className="mt-2">
                   <Button type="button" variant="bordered" onPress={goBack}>

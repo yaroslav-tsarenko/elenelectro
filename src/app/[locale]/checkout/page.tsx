@@ -17,6 +17,7 @@ import { checkoutSchema, type CheckoutFormData } from "@/lib/validators/checkout
 import { formatPrice } from "@/lib/utils/format-price";
 import { COUNTRIES } from "@/lib/countries";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { MerchantInfo } from "@/components/checkout/MerchantInfo";
 import { toast } from "sonner";
 import {
   Mail, Phone, MapPin, Truck, CreditCard,
@@ -142,6 +143,7 @@ export default function CheckoutPage() {
         country: "",
       },
       shippingMethod: "standard",
+      acceptedPolicies: false,
     },
   });
 
@@ -607,6 +609,33 @@ export default function CheckoutPage() {
                   ))}
                 </div>
 
+                <div style={{ marginTop: "0.25rem" }}>
+                  <label style={{ display: "flex", alignItems: "flex-start", gap: "0.625rem", cursor: "pointer" }}>
+                    <input
+                      type="checkbox"
+                      {...register("acceptedPolicies")}
+                      style={{
+                        width: "1.125rem",
+                        height: "1.125rem",
+                        marginTop: "0.125rem",
+                        accentColor: "var(--color-accent)",
+                        flexShrink: 0,
+                        cursor: "pointer",
+                      }}
+                    />
+                    <span className="text-[0.8125rem] leading-[1.5] [&_a]:text-brand [&_a]:font-semibold [&_a]:no-underline hover:[&_a]:underline">
+                      {t.rich("acceptPolicies", {
+                        terms: (chunks) => <Link href="/policies/terms" target="_blank">{chunks}</Link>,
+                        privacy: (chunks) => <Link href="/policies/privacy" target="_blank">{chunks}</Link>,
+                      })}
+                      {" *"}
+                    </span>
+                  </label>
+                  {errors.acceptedPolicies && (
+                    <span style={errorStyle}>{t("acceptPoliciesRequired")}</span>
+                  )}
+                </div>
+
                 <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
                   <Button variant="bordered" size="lg" onPress={() => setStep(1)} style={{ flex: "0 0 auto" }}>
                     Back
@@ -833,6 +862,8 @@ export default function CheckoutPage() {
               Your data is protected
             </div>
           </div>
+
+          <MerchantInfo title={t("merchantInfo")} />
         </motion.div>
       </div>
     </div>

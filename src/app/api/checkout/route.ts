@@ -22,6 +22,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
+    if (!validated.acceptedPolicies) {
+      return NextResponse.json(
+        { error: "Terms and Conditions and Privacy Policy must be accepted" },
+        { status: 400 },
+      );
+    }
+
     const productIds = items.map((item: { productId: string }) => item.productId);
     const products = await prisma.product.findMany({
       where: { id: { in: productIds } },

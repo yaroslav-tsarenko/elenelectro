@@ -138,7 +138,10 @@
     "country": "Country",
     "phone": "Phone",
     "orderSummary": "Order Summary",
-    "processing": "Processing your order..."
+    "processing": "Processing your order...",
+    "merchantInfo": "Sold by",
+    "acceptPolicies": "I have read and agree to the <terms>Terms and Conditions</terms> and the <privacy>Privacy Policy</privacy>",
+    "acceptPoliciesRequired": "You must accept the Terms and Conditions and the Privacy Policy to place your order"
   },
   "account": {
     "title": "My Account",
