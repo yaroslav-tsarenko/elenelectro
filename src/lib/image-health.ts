@@ -91,6 +91,18 @@ async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promis
   return out;
 }
 
+async function withRetry<T>(fn: () => Promise<T>, log: (line: string) => void, attempts = 4): Promise<T> {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (attempt >= attempts) throw err;
+      log(`database write failed (attempt ${attempt}/${attempts}), retrying: ${err instanceof Error ? err.message.split("\n").filter(Boolean).pop() : err}`);
+      await new Promise((r) => setTimeout(r, 2000 * attempt));
+    }
+  }
+}
+
 function markOf(metadata: Record<string, unknown> | null): HealthMark {
   const mark = metadata?.imageHealth;
   return mark && typeof mark === "object" ? (mark as HealthMark) : {};
@@ -179,7 +191,7 @@ export async function runImageHealth(options: ImageHealthOptions): Promise<Image
 
       if (!apply) continue;
       // One batched transaction: no interactive session to hold open through the pooler.
-      await prisma.$transaction([
+      await withRetry(() => prisma.$transaction([
         ...(removeDead ? [prisma.productImage.deleteMany({ where: { id: { in: dead.map((i) => i.id) } } })] : []),
         ...(removeDead
           ? kept.flatMap((img, order) => (img.sortOrder !== order ? [prisma.productImage.update({ where: { id: img.id }, data: { sortOrder: order } })] : []))
@@ -190,7 +202,7 @@ export async function runImageHealth(options: ImageHealthOptions): Promise<Image
               metadata = jsonb_set(COALESCE(metadata, '{}'::jsonb), '{imageHealth}', ${JSON.stringify(nextMark)}::jsonb),
               "updatedAt" = CASE WHEN status::text <> ${nextStatus} THEN now() ELSE "updatedAt" END
           WHERE id = ${product.id}`,
-      ]);
+      ]), log);
     }
     log(`checked ${Math.min(start + batchSize, products.length)}/${products.length}: dead images ${report.deadImages}, archived ${report.productsArchived.length}, restored ${report.productsRestored.length}`);
   }
