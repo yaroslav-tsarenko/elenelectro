@@ -178,20 +178,19 @@ export async function runImageHealth(options: ImageHealthOptions): Promise<Image
       if (removeDead) report.imagesRemoved += dead.length;
 
       if (!apply) continue;
-      await prisma.$transaction(async (tx) => {
-        if (removeDead) {
-          await tx.productImage.deleteMany({ where: { id: { in: dead.map((i) => i.id) } } });
-          for (const [order, img] of kept.entries()) {
-            if (img.sortOrder !== order) await tx.productImage.update({ where: { id: img.id }, data: { sortOrder: order } });
-          }
-        }
-        await tx.$executeRaw`
+      // One batched transaction: no interactive session to hold open through the pooler.
+      await prisma.$transaction([
+        ...(removeDead ? [prisma.productImage.deleteMany({ where: { id: { in: dead.map((i) => i.id) } } })] : []),
+        ...(removeDead
+          ? kept.flatMap((img, order) => (img.sortOrder !== order ? [prisma.productImage.update({ where: { id: img.id }, data: { sortOrder: order } })] : []))
+          : []),
+        prisma.$executeRaw`
           UPDATE "Product"
           SET status = ${nextStatus}::"ProductStatus",
               metadata = jsonb_set(COALESCE(metadata, '{}'::jsonb), '{imageHealth}', ${JSON.stringify(nextMark)}::jsonb),
               "updatedAt" = CASE WHEN status::text <> ${nextStatus} THEN now() ELSE "updatedAt" END
-          WHERE id = ${product.id}`;
-      });
+          WHERE id = ${product.id}`,
+      ]);
     }
     log(`checked ${Math.min(start + batchSize, products.length)}/${products.length}: dead images ${report.deadImages}, archived ${report.productsArchived.length}, restored ${report.productsRestored.length}`);
   }
@@ -202,11 +201,11 @@ export async function runImageHealth(options: ImageHealthOptions): Promise<Image
 }
 
 async function fixCategoryImages(report: ImageHealthReport, apply: boolean, concurrency: number, timeoutMs: number) {
-  const categories = await prisma.$queryRaw<Array<{ id: string; slug: string; imageUrl: string }>>`
-    SELECT id, slug, "imageUrl" FROM "Category" WHERE "imageUrl" IS NOT NULL`;
-  const states = await mapLimit(categories, concurrency, (c) => checkImage(c.imageUrl, timeoutMs));
-  const dead = categories.filter((_, i) => states[i] === "dead");
-  await mapLimit(dead, 4, async (category) => {
+  const categories = await prisma.$queryRaw<Array<{ id: string; slug: string; imageUrl: string | null }>>`
+    SELECT id, slug, "imageUrl" FROM "Category"`;
+  const states = await mapLimit(categories, concurrency, (c) => (c.imageUrl ? checkImage(c.imageUrl, timeoutMs) : Promise.resolve<ImageState>("dead")));
+  const needCover = categories.filter((_, i) => states[i] === "dead");
+  await mapLimit(needCover, 4, async (category) => {
     const candidates = await prisma.$queryRaw<Array<{ url: string }>>`
       SELECT pi.url FROM "ProductCategory" pc
       JOIN "Product" p ON p.id = pc."productId" AND p.status = 'ACTIVE'
@@ -216,6 +215,8 @@ async function fixCategoryImages(report: ImageHealthReport, apply: boolean, conc
       LIMIT 12`;
     const candidateStates = await mapLimit(candidates, concurrency, (c) => checkImage(c.url, timeoutMs));
     const replacement = candidates.find((_, j) => candidateStates[j] === "live")?.url ?? null;
+    // A category without a cover keeps waiting until a live product image turns up.
+    if (!category.imageUrl && !replacement) return;
     report.categoriesFixed.push(category.slug);
     if (apply) await prisma.category.update({ where: { id: category.id }, data: { imageUrl: replacement } });
   });
