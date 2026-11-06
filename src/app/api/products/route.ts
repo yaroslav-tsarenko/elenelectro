@@ -118,11 +118,13 @@ export async function GET(request: NextRequest) {
         totalPages: Math.ceil(total / pageSize),
       },
       {
-        headers: {
-          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=86400",
-          "CDN-Cache-Control": "public, s-maxage=120",
-          "Vercel-CDN-Cache-Control": "public, s-maxage=120",
-        },
+        headers: status
+          ? { "Cache-Control": "no-store" }
+          : {
+              "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+              "CDN-Cache-Control": "public, s-maxage=3600",
+              "Vercel-CDN-Cache-Control": "public, s-maxage=3600",
+            },
       },
     );
   } catch (error) {
